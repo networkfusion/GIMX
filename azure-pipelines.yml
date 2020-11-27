@@ -72,10 +72,13 @@ jobs:
      choco install -y wxwidgets
      rem refreshenv
     displayName: 'Install wxwidgets'
+    
+  - script: echo "##vso[task.prependpath]C:\wxWidgets-3.1.2\"
+    displayName: Tweak PATH for wxwidgets
 
   - script: |
       #gcc --version
-      make -C $BUILD_SOURCESDIRECTORY -j8
+      make -C %BUILD_SOURCESDIRECTORY% -j8
     displayName: 'Build Program'
     continueOnError: false
 
