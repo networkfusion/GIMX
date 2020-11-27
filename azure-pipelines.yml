@@ -67,12 +67,13 @@ jobs:
     #path: string  # path to check out source code, relative to the agent's build directory (e.g. \_work\1); defaults to a directory called `s`
     persistCredentials: false  # if 'true', leave the OAuth token in the Git config after the initial fetch; defaults to false
     
-  - script: |
-     choco install -y msys2
-     rem refreshenv
-    displayName: 'Install MSYS2'
+  #- script: |
+  #   choco install -y msys2
+  #   rem refreshenv
+  #  displayName: 'Install MSYS2'
     
   - script: |
+     mkdir ./wx-config/
      curl -L http://wx-config-win.googlecode.com/svn/binary/wx-config.exe --output ./wx-config/wx-config.exe
      cmd.exe /c "set PATH=%PATH%;%BUILD_SOURCESDIRECTORY%\wx-config"
     displayName: 'Install wx-config'
