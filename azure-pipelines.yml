@@ -63,10 +63,10 @@ jobs:
     persistCredentials: false  # if 'true', leave the OAuth token in the Git config after the initial fetch; defaults to false
   
   # Install msys2 (probably already installed so commented out)
-  #- script: |
-  #   choco install -y msys2
-  #   rem refreshenv
-  #  displayName: 'Install MSYS2'
+  - script: |
+     choco install -y msys2
+     rem refreshenv
+    displayName: 'Install MSYS2'
   
   - script: |
      choco install -y wxwidgets
