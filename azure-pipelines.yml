@@ -7,7 +7,7 @@ trigger:
 jobs:
 - job: GIMX_Linux
   pool:
-    vmImage: 'ubuntu-16.04'
+    vmImage: 'ubuntu-18.04'
   steps:
   - checkout: self # self represents the repo where the initial Pipelines YAML file was found
     clean: false  # if true, run `execute git clean -ffdx && git reset --hard HEAD` before fetching
@@ -23,11 +23,6 @@ jobs:
     continueOnError: false
     
   - script: |
-      #export CXX=${CXX:-g++}
-      #export CXX_FOR_BUILD=${CXX_FOR_BUILD:-g++}
-      #export CC=${CC:-gcc}
-      #export CC_FOR_BUILD=${CC_FOR_BUILD:-gcc}
-      #gcc --version
       make -f Makefile
     displayName: 'Build Program'
     continueOnError: false
