@@ -52,7 +52,7 @@ jobs:
 
 - job: GIMX_Windows
   pool:
-    vmImage: 'windows-latest'
+    vmImage: 'vs2017-win2016'
   steps:
   - checkout: self # self represents the repo where the initial Pipelines YAML file was found
     clean: false  # if true, run `execute git clean -ffdx && git reset --hard HEAD` before fetching
@@ -68,10 +68,10 @@ jobs:
   #   rem refreshenv
   #  displayName: 'Install MSYS2'
   
-  - script: |
-     choco install -y wxwidgets
-     rem refreshenv
-    displayName: 'Install wxwidgets'
+  #- script: |
+  #   choco install -y wxwidgets
+  #   rem refreshenv
+  #  displayName: 'Install wxwidgets'
 
   - bash: |
       #gcc --version
