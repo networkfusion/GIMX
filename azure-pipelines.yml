@@ -17,20 +17,18 @@ jobs:
     #path: string  # path to check out source code, relative to the agent's build directory (e.g. \_work\1); defaults to a directory called `s`
     persistCredentials: false  # if 'true', leave the OAuth token in the Git config after the initial fetch; defaults to false
   - script: |
-      echo Add Linux dependencies
       sudo apt-get update
       sudo apt-get install libwxgtk3.0-dev libbluetooth-dev libxml2-dev libusb-1.0-0-dev libncursesw5-dev gettext libmhash-dev libcurl4-gnutls-dev libxi-dev libx11-dev
-         
-      #cd $BUILD_SOURCESDIRECTORY
-      
-      echo Build App
-      #make -f Makefile
-      export CXX=${CXX:-g++}
-      export CXX_FOR_BUILD=${CXX_FOR_BUILD:-g++}
-      export CC=${CC:-gcc}
-      export CC_FOR_BUILD=${CC_FOR_BUILD:-gcc}
-      gcc --version
-      make
+    displayName: 'Add Linux dependencies'
+    continueOnError: false
+    
+  - script: |
+      #export CXX=${CXX:-g++}
+      #export CXX_FOR_BUILD=${CXX_FOR_BUILD:-g++}
+      #export CC=${CC:-gcc}
+      #export CC_FOR_BUILD=${CC_FOR_BUILD:-gcc}
+      #gcc --version
+      make -f Makefile
     displayName: 'Build Program'
     continueOnError: false
 
@@ -76,7 +74,8 @@ jobs:
     
   - script: |
       gcc --version
-      make
+      set MSYSTEM=MINGW64
+      make -f Makefile
     displayName: 'Build Program'
     continueOnError: false
 
