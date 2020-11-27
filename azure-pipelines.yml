@@ -66,17 +66,10 @@ jobs:
   #   choco install -y msys2
   #   rem refreshenv
   #  displayName: 'Install MSYS2'
-    
-  - script: |
-     pacman -S mingw-w64-x86_64-wxWidgets
-     #curl -LJ http://wx-config-win.googlecode.com/svn/binary/wx-config.exe --output $BUILD_SOURCESDIRECTORY/wx-config/wx-config.exe --create-dirs
-     #cmd.exe /c "set PATH=%PATH%;%BUILD_SOURCESDIRECTORY%\wx-config"
-    displayName: 'Install wx-config'
-    
+        
   - bash: |
       gcc --version
-      #set MSYSTEM=MINGW64
-      set wx-config=$BUILD_SOURCESDIRECTORY/wx-config/
+      pacman --noconfirm -S mingw-w64-x86_64-wxWidgets
       make -C $BUILD_SOURCESDIRECTORY -j8
     displayName: 'Build Program'
     continueOnError: false
