@@ -16,7 +16,8 @@ jobs:
       #cd $BUILD_SOURCESDIRECTORY
       
       echo Build App
-      make -f Makefile
+      #make -f Makefile
+      make
     displayName: 'Build Program'
     continueOnError: false
 
