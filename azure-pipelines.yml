@@ -65,6 +65,7 @@ jobs:
   # Install msys2 (probably already installed so commented out)
   - script: |
      choco install -y msys2
+     pacman -Syu
      rem refreshenv
     displayName: 'Install MSYS2'
      
