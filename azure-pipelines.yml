@@ -44,10 +44,10 @@ jobs:
       parallel: true # Optional
       #parallelCount: # Optional
 
-- job: GIMX_Windows
-  pool:
-    vmImage: 'windows-latest'
-  steps:
+#- job: GIMX_Windows
+#  pool:
+#    vmImage: 'windows-latest'
+#  steps:
   #- script: |
   #    echo Downloading dependencies
       #curl -L https://github.com/wmcbrine/PDCurses/archive/3.9.zip --output PDCurses.zip
