@@ -67,6 +67,9 @@ jobs:
      choco install -y msys2
      rem refreshenv
     displayName: 'Install MSYS2'
+    
+  - script: echo "##vso[task.prependpath]C:\tools\msys64"
+    displayName: Tweak PATH for msys2
   
   - script: |
      choco install -y wxwidgets
