@@ -77,7 +77,6 @@ jobs:
     displayName: Tweak PATH for wxwidgets
 
   - script: |
-      gcc --version
       make -C %BUILD_SOURCESDIRECTORY% -j8
     displayName: 'Build Program'
     continueOnError: false
