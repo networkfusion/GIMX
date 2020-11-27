@@ -73,8 +73,8 @@ jobs:
   #  displayName: 'Install MSYS2'
     
   - script: |
-     mkdir ./wx-config/
-     curl -L http://wx-config-win.googlecode.com/svn/binary/wx-config.exe --output ./wx-config/wx-config.exe
+     mkdir $BUILD_SOURCESDIRECTORY/wx-config/
+     curl -L http://wx-config-win.googlecode.com/svn/binary/wx-config.exe --output $BUILD_SOURCESDIRECTORY/wx-config/wx-config.exe
      cmd.exe /c "set PATH=%PATH%;%BUILD_SOURCESDIRECTORY%\wx-config"
     displayName: 'Install wx-config'
     
