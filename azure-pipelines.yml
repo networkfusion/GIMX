@@ -72,10 +72,10 @@ jobs:
      rem refreshenv
     displayName: 'Install MSYS2'
     
-  - script: |
+  - bash: |
       gcc --version
-      set MSYSTEM=MINGW64
-      make -C GIMX -j8
+      #set MSYSTEM=MINGW64
+      make -C $BUILD_SOURCESDIRECTORY -j8
     displayName: 'Build Program'
     continueOnError: false
 
