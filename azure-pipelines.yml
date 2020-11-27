@@ -68,12 +68,12 @@ jobs:
   #   rem refreshenv
   #  displayName: 'Install MSYS2'
   
-  #- script: |
-  #   choco install -y wxwidgets
-  #   rem refreshenv
-  #  displayName: 'Install wxwidgets'
+  - script: |
+     choco install -y wxwidgets
+     rem refreshenv
+    displayName: 'Install wxwidgets'
 
-  - bash: |
+  - script: |
       #gcc --version
       make -C $BUILD_SOURCESDIRECTORY -j8
     displayName: 'Build Program'
