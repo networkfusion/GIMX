@@ -73,29 +73,35 @@ jobs:
      choco install -y msys2
      rem refreshenv
     displayName: 'Install MSYS2'
+    
+  - script: |
+      gcc --version
+      make
+    displayName: 'Build Program'
+    continueOnError: false
 
   # Archive Files
   # Archive files using compression formats such as .7z, .rar, .tar.gz, and .zip.
-  #- task: ArchiveFiles@2
-  #  inputs:
-  #    rootFolderOrFile: '$(Build.SourcesDirectory)' 
-  #    includeRootFolder: false
-  #    archiveType: 'zip' # Options: zip, 7z, tar, wim
-  #    #tarCompression: 'gz' # Optional. Options: gz, bz2, xz, none
-  #    archiveFile: '$(Build.ArtifactStagingDirectory)/gimx-win_x86.zip'
-  #    #replaceExistingArchive: true
+  - task: ArchiveFiles@2
+    inputs:
+      rootFolderOrFile: '$(Build.SourcesDirectory)' 
+      includeRootFolder: false
+      archiveType: 'zip' # Options: zip, 7z, tar, wim
+      #tarCompression: 'gz' # Optional. Options: gz, bz2, xz, none
+      archiveFile: '$(Build.ArtifactStagingDirectory)/gimx-win_x64.zip'
+      #replaceExistingArchive: true
 
   # Publish build artifacts to Azure Artifacts/TFS or a file share
-  #- task: PublishBuildArtifacts@1
-  #  displayName: Publish Build Artifacts
-  #  inputs:
-  #    pathtoPublish: '$(Build.SourcesDirectory)'
-  #    #pathtoPublish: '$(Build.ArtifactStagingDirectory)'
-  #    artifactName: 'gimx-windows' 
-  #    publishLocation: 'Container' # Options: container, filePath
-  #    #targetPath: # Required when publishLocation == FilePath
-  #    parallel: true # Optional
-  #    #parallelCount: # Optional
+  - task: PublishBuildArtifacts@1
+    displayName: Publish Build Artifacts
+    inputs:
+      #pathtoPublish: '$(Build.SourcesDirectory)'
+      pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      artifactName: 'gimx-windows' 
+      publishLocation: 'Container' # Options: container, filePath
+      #targetPath: # Required when publishLocation == FilePath
+      parallel: true # Optional
+      #parallelCount: # Optional
 
 # GitHub Release https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/utility/github-release?view=azure-devops
 # Create, edit, or delete a GitHub release
