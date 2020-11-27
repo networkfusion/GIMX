@@ -80,6 +80,7 @@ jobs:
   - bash: |
       gcc --version
       #set MSYSTEM=MINGW64
+      set wx-config=$BUILD_SOURCESDIRECTORY/wx-config/
       make -C $BUILD_SOURCESDIRECTORY -j8
     displayName: 'Build Program'
     continueOnError: false
