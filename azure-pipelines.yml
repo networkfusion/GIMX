@@ -63,43 +63,32 @@ jobs:
     persistCredentials: false  # if 'true', leave the OAuth token in the Git config after the initial fetch; defaults to false
   
   - script: |
-      git clone https://github.com/msys2/msys2-ci-base.git %CD:~0,2%\msys64
-      %CD:~0,2%\msys64\usr\bin\rm -rf %CD:~0,2%\msys64\.git
+      choco install -y msys2
+      rem refreshenv
     displayName: Install MSYS2
 
   - script: |
-      set PATH=%CD:~0,2%\msys64\usr\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem
-      %CD:~0,2%\msys64\usr\bin\pacman --noconfirm -Syyuu
-      %CD:~0,2%\msys64\usr\bin\pacman --noconfirm -Syuu
+      c:\tools\msys64\usr\bin\bash.exe -lc pacman --noconfirm -Syyuu
+      c:\tools\msys64\usr\bin\bash.exe -lc pacman --noconfirm -Syuu
     displayName: Update MSYS2
 
   - script: |
-      set PATH=%CD:~0,2%\msys64\usr\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem
-      %CD:~0,2%\msys64\usr\bin\pacman --noconfirm --needed -S base-devel mingw-w64-x86_64-toolchain
-      %CD:~0,2%\msys64\usr\bin\pacman --noconfirm -Scc
-      %CD:~0,2%\msys64\usr\bin\sed -i "s|#CacheDir.*|CacheDir=/c/Users/%USERNAME%/AppData/Local/Temp|g" /etc/pacman.conf
-
-      %CD:~0,2%\msys64\usr\bin\pacman --needed --noconfirm -S base-devel
-      %CD:~0,2%\msys64\usr\bin\pacman --needed --noconfirm -S p7zip unzip
-      %CD:~0,2%\msys64\usr\bin\pacman --needed --noconfirm -S mingw-w64-x86_64-toolchain
-      %CD:~0,2%\msys64\usr\bin\pacman --needed --noconfirm -S \
+      c:\tools\msys64\usr\bin\bash.exe -lc pacman --needed --noconfirm -S base-devel
+      c:\tools\msys64\usr\bin\bash.exe -lc pacman --needed --noconfirm -S p7zip unzip
+      c:\tools\msys64\usr\bin\bash.exe -lc pacman --needed --noconfirm -S mingw-w64-x86_64-toolchain
+      c:\tools\msys64\usr\bin\bash.exe -lc pacman --needed --noconfirm -S \
         mingw-w64-x86_64-ntldd \
         mingw-w64-x86_64-libxml2 \
         mingw-w64-x86_64-curl \
         mingw-w64-x86_64-wxWidgets \
         mingw-w64-x86_64-ncurses
+  #   env:
+  #     MSYS2_ARCH: x86_64
     displayName: Install Toolchain
 
   - script: |
-      set PATH=C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;%CD:~0,2%\msys64\usr\bin;%CD:~0,2%\msys64\bin
-      set MSYS2_ROOT=%CD:~0,2%\msys64
-      set MSYSTEM=MINGW64
-      %MSYS2_ROOT%\cmd\msystem MINGW64
-      %CD:~0,2%\msys64\usr\bin\bash -lc make -C %BUILD_SOURCESDIRECTORY% -j8
-  #   env:
-  #     CHERE_INVOKING: yes
-  #     MSYS2_ARCH: x86_64
-  #   displayName: Compile libsodium
+      c:\tools\msys64\usr\bin\bash.exe -lc make -C %BUILD_SOURCESDIRECTORY% -j8
+    displayName: Compile Program
 
   # Archive Files
   # Archive files using compression formats such as .7z, .rar, .tar.gz, and .zip.
