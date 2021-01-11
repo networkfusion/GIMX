@@ -111,7 +111,7 @@ jobs:
       targetFolder: '$(Build.ArtifactStagingDirectory)'
       #cleanTargetFolder: false # Optional
       #overWrite: false # Optional
-      #flattenFolders: false # Optional
+      flattenFolders: true # Optional
       #preserveTimestamp: false # Optional
 
 
