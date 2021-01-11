@@ -94,22 +94,37 @@ jobs:
     displayName: Install Toolchain
 
   - script: |
-      c:\tools\msys64\usr\bin\bash.exe -lc "cd $BUILD_SOURCESDIRECTORY && mkdir build && cd build && make -C $BUILD_SOURCESDIRECTORY -j4"
+      c:\tools\msys64\usr\bin\bash.exe -lc " make -C $BUILD_SOURCESDIRECTORY -j4"
     env:
       CHERE_INVOKING: 'yes'  # Preserve the current working directory
       MSYSTEM: 'MINGW64'  # Start a 64 bit Mingw environment
     displayName: Compile Program
 
+  # Copy files
+  # Copy files from a source folder to a target folder using patterns matching file paths (not folder paths)
+  - task: CopyFiles@2
+    inputs:
+      sourceFolder: '$(Build.SourcesDirectory)' 
+      contents: |
+        **\*.exe
+        **\*.dll
+      targetFolder: '$(Build.ArtifactStagingDirectory)'
+      #cleanTargetFolder: false # Optional
+      #overWrite: false # Optional
+      #flattenFolders: false # Optional
+      #preserveTimestamp: false # Optional
+
+
   # Archive Files
   # Archive files using compression formats such as .7z, .rar, .tar.gz, and .zip.
-  - task: ArchiveFiles@2
-    inputs:
-      rootFolderOrFile: '$(Build.SourcesDirectory)' 
-      includeRootFolder: false
-      archiveType: 'zip' # Options: zip, 7z, tar, wim
-      #tarCompression: 'gz' # Optional. Options: gz, bz2, xz, none
-      archiveFile: '$(Build.ArtifactStagingDirectory)/gimx-win_x64.zip'
-      #replaceExistingArchive: true
+  # - task: ArchiveFiles@2
+  #   inputs:
+  #     rootFolderOrFile: '$(Build.SourcesDirectory)' 
+  #     includeRootFolder: false
+  #     archiveType: 'zip' # Options: zip, 7z, tar, wim
+  #     #tarCompression: 'gz' # Optional. Options: gz, bz2, xz, none
+  #     archiveFile: '$(Build.ArtifactStagingDirectory)/gimx-win_x64.zip'
+  #     #replaceExistingArchive: true
 
   # Publish build artifacts to Azure Artifacts/TFS or a file share
   - task: PublishBuildArtifacts@1
