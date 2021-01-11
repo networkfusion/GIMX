@@ -71,18 +71,17 @@ jobs:
       c:\tools\msys64\usr\bin\bash.exe -lc "pacman --needed --noconfirm -S base-devel"
       c:\tools\msys64\usr\bin\bash.exe -lc "pacman --needed --noconfirm -S p7zip unzip"
       c:\tools\msys64\usr\bin\bash.exe -lc "pacman --needed --noconfirm -S mingw-w64-%MSYS2_ARCH%-toolchain"
-      c:\tools\msys64\usr\bin\bash.exe -lc "pacman --needed --noconfirm -S \
-        mingw-w64-%MSYS2_ARCH%-ntldd \
-        mingw-w64-%MSYS2_ARCH%-libxml2 \
-        mingw-w64-%MSYS2_ARCH%-curl \
-        mingw-w64-%MSYS2_ARCH%-wxWidgets \
-        mingw-w64-%MSYS2_ARCH%-ncurses"
+      c:\tools\msys64\usr\bin\bash.exe -lc "pacman --needed --noconfirm -S mingw-w64-%MSYS2_ARCH%-ntldd"
+      c:\tools\msys64\usr\bin\bash.exe -lc "pacman --needed --noconfirm -S mingw-w64-%MSYS2_ARCH%-libxml2"
+      c:\tools\msys64\usr\bin\bash.exe -lc "pacman --needed --noconfirm -S mingw-w64-%MSYS2_ARCH%-curl"
+      c:\tools\msys64\usr\bin\bash.exe -lc "pacman --needed --noconfirm -S mingw-w64-%MSYS2_ARCH%-wxWidgets"
+      c:\tools\msys64\usr\bin\bash.exe -lc "pacman --needed --noconfirm -S mingw-w64-%MSYS2_ARCH%-ncurses"
     env:
       MSYS2_ARCH: x86_64
     displayName: Install Toolchain
 
   - script: |
-      c:\tools\msys64\usr\bin\bash.exe -lc "make -C %BUILD_SOURCESDIRECTORY% -j4"
+      c:\tools\msys64\usr\bin\bash.exe -lc "cd $BUILD_SOURCESDIRECTORY && make -j4"
     displayName: Compile Program
 
   # Archive Files
