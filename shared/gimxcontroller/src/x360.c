@@ -141,7 +141,7 @@ static s_controller controller =
   .vid = X360_VENDOR,
   .pid = X360_PRODUCT,
   .refresh_period = { .min_value = 1000, .default_value = 8000 },
-  .auth_required = 1,
+  .auth_required = 0,
   .axes = axes,
   .axis_name_dirs = { .nb = sizeof(axis_name_dirs)/sizeof(*axis_name_dirs), .values = axis_name_dirs },
   .fp_build_report = build_report,
