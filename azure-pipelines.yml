@@ -81,7 +81,7 @@ jobs:
     displayName: Install Toolchain
 
   - script: |
-      c:\tools\msys64\usr\bin\bash.exe -lc "cd $BUILD_SOURCESDIRECTORY && make -j4"
+      c:\tools\msys64\usr\bin\bash.exe -lc "make -C $BUILD_SOURCESDIRECTORY -j4"
     env:
       CHERE_INVOKING: 'yes'  # Preserve the current working directory
       MSYSTEM: 'MINGW64'  # Start a 64 bit Mingw environment
