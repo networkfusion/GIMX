@@ -52,7 +52,7 @@ jobs:
 
 - job: GIMX_Windows
   pool:
-    vmImage: 'vs2017-win2016'
+    vmImage: 'windows-2019'
   steps:
   - checkout: self # self represents the repo where the initial Pipelines YAML file was found
     clean: false  # if true, run `execute git clean -ffdx && git reset --hard HEAD` before fetching
@@ -63,22 +63,22 @@ jobs:
     persistCredentials: false  # if 'true', leave the OAuth token in the Git config after the initial fetch; defaults to false
   
   # Install msys2 (probably already installed so commented out)
-  - script: |
-     choco install -y msys2
-     pacman -Syu
-     rem refreshenv
-    displayName: 'Install MSYS2'
+  # - script: |
+  #    choco install -y msys2
+  #    pacman -Syu
+  #    rem refreshenv
+  #   displayName: 'Install MSYS2'
      
   - script: |
      choco install -y wxwidgets
      rem refreshenv
     displayName: 'Install wxwidgets'
 
-  - script: echo "##vso[task.prependpath]C:\tools\msys64"
-    displayName: Tweak PATH for msys2
+  # - script: echo "##vso[task.prependpath]C:\tools\msys64"
+  #   displayName: Tweak PATH for msys2
     
-  - script: echo "##vso[task.prependpath]C:\wxWidgets-3.1.2\"
-    displayName: Tweak PATH for wxwidgets
+  # - script: echo "##vso[task.prependpath]C:\wxWidgets-3.1.2\"
+  #   displayName: Tweak PATH for wxwidgets
 
   - script: |
       make -C %BUILD_SOURCESDIRECTORY% -j8
