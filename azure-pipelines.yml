@@ -7,7 +7,7 @@ trigger:
 jobs:
 - job: GIMX_Linux
   pool:
-    vmImage: 'ubuntu-20.04'
+    vmImage: 'ubuntu-18.04'
   steps:
   - checkout: self # self represents the repo where the initial Pipelines YAML file was found
     clean: false  # if true, run `execute git clean -ffdx && git reset --hard HEAD` before fetching
@@ -76,8 +76,21 @@ jobs:
       c:\tools\msys64\usr\bin\bash.exe -lc "pacman --needed --noconfirm -S mingw-w64-%MSYS2_ARCH%-curl"
       c:\tools\msys64\usr\bin\bash.exe -lc "pacman --needed --noconfirm -S mingw-w64-%MSYS2_ARCH%-wxWidgets"
       c:\tools\msys64\usr\bin\bash.exe -lc "pacman --needed --noconfirm -S mingw-w64-%MSYS2_ARCH%-ncurses"
+
+      c:\tools\msys64\usr\bin\bash.exe -lc "mkdir gimx-install"
+      c:\tools\msys64\usr\bin\bash.exe -lc "cd gimx-install"
+
+      c:\tools\msys64\usr\bin\bash.exe -lc "wget https://github.com/matlo/GIMX-MINGW-packages/releases/download/${PACKAGE_RELEASE}/mingw-w64-$ARCH-SDL2-2.0.10-1-any.pkg.tar.zst"
+      c:\tools\msys64\usr\bin\bash.exe -lc "wget https://github.com/matlo/GIMX-MINGW-packages/releases/download/${PACKAGE_RELEASE}/mingw-w64-$ARCH-avrdude-6.3-1-any.pkg.tar.zst"
+      c:\tools\msys64\usr\bin\bash.exe -lc "wget https://github.com/matlo/GIMX-MINGW-packages/releases/download/${PACKAGE_RELEASE}/mingw-w64-$ARCH-libusb-1.0.23-1-any.pkg.tar.zst"
+
+      c:\tools\msys64\usr\bin\bash.exe -lc "pacman --needed --noconfirm -U *.pkg.tar.zst"
+
+      c:\tools\msys64\usr\bin\bash.exe -lc "cd .."
+      c:\tools\msys64\usr\bin\bash.exe -lc "rm -rf gimx-install"
     env:
       MSYS2_ARCH: x86_64
+      PACKAGE_RELEASE: "v8"
     displayName: Install Toolchain
 
   - script: |
