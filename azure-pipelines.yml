@@ -7,7 +7,7 @@ trigger:
 jobs:
 - job: GIMX_Linux
   pool:
-    vmImage: 'ubuntu-18.04'
+    vmImage: 'ubuntu-20.04'
   steps:
   - checkout: self # self represents the repo where the initial Pipelines YAML file was found
     clean: false  # if true, run `execute git clean -ffdx && git reset --hard HEAD` before fetching
@@ -82,6 +82,9 @@ jobs:
 
   - script: |
       c:\tools\msys64\usr\bin\bash.exe -lc "cd $BUILD_SOURCESDIRECTORY && make -j4"
+    env:
+      CHERE_INVOKING: 'yes'  # Preserve the current working directory
+      MSYSTEM: 'MINGW64'  # Start a 64 bit Mingw environment
     displayName: Compile Program
 
   # Archive Files
